@@ -30,7 +30,7 @@ class Tree:
 #[root,dir13]
 #self.refresh(goto,dir13)
 
-    def refresh(self, command = None, value = None):
+    def refresh(self, command = None, value = None, tree1 = None, tree2 = None):
         if(command == "goto"):
             node = self.getNodeParents(value,self.WIA.getLastValue())
             self.WIA.add(node)
@@ -57,6 +57,15 @@ class Tree:
             self.WIA.clearQueue()
             
             return self.WIA.getLastValue()
+
+        elif(command == "copy"):
+            nodeToCopy = copy.deepcopy(tree1.getNodeParents(value,tree1.WIA.getLastValue()))
+            nodeWhereCopy = tree2.WIA.getLastValue()
+            nodeWhereCopy.children.add(nodeToCopy.value)
+            nodeCopied = nodeWhereCopy.children.getNode(nodeToCopy.value)
+            nodeCopied.children = nodeToCopy.children
+
+            return nodeWhereCopy
         
         elif(not command):
             return self.WIA.getLastValue()

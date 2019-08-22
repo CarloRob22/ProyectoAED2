@@ -1,4 +1,5 @@
-from UiWindow import *
+# -*- coding: utf8 -*-
+from Núcleo.UiWindow import *
 from Tree import *
 import copy
 
@@ -188,27 +189,19 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
         listItems = self.Explorer1.selectedItems()
         if not listItems: return   
         for item in listItems:
-            node1 = copy.deepcopy(self.tree1.getNodeParents(item.text(),self.tree1.WIA.getLastValue()))
-            node2 = self.tree2.WIA.getLastValue()
-            node2.children.add(node1.value)
-            node3 = node2.children.getNode(node1.value)
-            node3.children = node1.children
+            node = self.tree2.refresh("copy",item.text(),self.tree1,self.tree2)
 
         self.Explorer2.clear()
-        self.qRefresh2(node2)
+        self.qRefresh2(node)
 
     def qCopy2to1(self):
         listItems = self.Explorer2.selectedItems()
         if not listItems: return   
         for item in listItems:
-            node1 = copy.deepcopy(self.tree2.getNodeParents(item.text(),self.tree2.WIA.getLastValue()))
-            node2 = self.tree1.WIA.getLastValue()
-            node2.children.add(node1.value)
-            node3 = node2.children.getNode(node1.value)
-            node3.children = node1.children
-
+            node = self.tree2.refresh("copy",item.text(),self.tree2,self.tree1)
+            
         self.Explorer1.clear()
-        self.qRefresh1(node2)
+        self.qRefresh1(node)
 
    
 

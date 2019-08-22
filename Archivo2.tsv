@@ -1,6 +1,5 @@
 ROOT/ 
 	defaultUser/ 
-	A/ 
 	Document/ 
 		A/ 
 		CodigoAED/ 
@@ -17,10 +16,3 @@ ROOT/
 			bgujj/ 
 	Photos/ 
 		FolderIcon 
-	User/ 
-		defaultUser/ 
-		hbj 
-		NombrePC/ 
-			vhg/ 
-				bgujj/ 
-		UserConfig 
