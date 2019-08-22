@@ -1,7 +1,7 @@
 # -*- coding: utf8 -*-
-from Núcleo.UiWindow import *
-from Tree import *
-import copy
+from Núcleo.UiWindow import Ui_MainWindow, QtCore, QtGui, QtWidgets
+from Núcleo.Tree import Tree 
+
 
 
 class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
@@ -11,9 +11,9 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
         #--------------------------------------
         
         self.tree1 = Tree()
-        self.tree1.fileToTree("Archivo1.tsv")
+        self.tree1.fileToTree("Memoria//Tree-A.mem")
         self.tree2 = Tree()
-        self.tree2.fileToTree("Archivo2.tsv")
+        self.tree2.fileToTree("Memoria//Tree-B.mem")
        
 
        
@@ -28,36 +28,36 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
         self.Remove2.clicked.connect(self.qRemove2)
         self.Copy1to2.clicked.connect(self.qCopy1to2)
         self.Copy2to1.clicked.connect(self.qCopy2to1)
-        self.qRefresh1(self.tree1.refresh())
-        self.qRefresh2(self.tree2.refresh())
+        self.qRefresh1(self.tree1.update())
+        self.qRefresh2(self.tree2.update())
         
        
 
     def qGoTo1(self):#***
         if(self.Explorer1.currentItem().text() == ".."):
-            node = self.tree1.refresh("back")
+            node = self.tree1.update("back")
             self.Explorer1.clear()
             self.qRefresh1(node)
         elif(self.Explorer1.currentItem().text() == "."):
-            node = self.tree1.refresh("goStart")
+            node = self.tree1.update("goStart")
             self.Explorer1.clear()
             self.qRefresh1(node)
         elif(self.Explorer1.currentItem().text()[-1] == "/"):
-            node = self.tree1.refresh("goto",self.Explorer1.currentItem().text())
+            node = self.tree1.update("goto",self.Explorer1.currentItem().text())
             self.Explorer1.clear()
             self.qRefresh1(node)
 
     def qGoTo2(self):#***
         if(self.Explorer2.currentItem().text() == ".."):
-            node = self.tree2.refresh("back")
+            node = self.tree2.update("back")
             self.Explorer2.clear()
             self.qRefresh2(node)
         elif(self.Explorer2.currentItem().text() == "."):
-            node = self.tree2.refresh("goStart")
+            node = self.tree2.update("goStart")
             self.Explorer2.clear()
             self.qRefresh2(node)
         elif(self.Explorer2.currentItem().text()[-1] == "/"):
-            node = self.tree2.refresh("goto",self.Explorer2.currentItem().text())
+            node = self.tree2.update("goto",self.Explorer2.currentItem().text())
             self.Explorer2.clear()
             self.qRefresh2(node)
         
@@ -73,7 +73,7 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
         name = self.qGetName("carpeta")
         if(name):
             name = name + "/"
-            node = self.tree1.refresh("add",name)
+            node = self.tree1.update("add",name)
             self.Explorer1.clear()
             self.qRefresh1(node)
             
@@ -84,7 +84,7 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
         name = self.qGetName("carpeta")
         if(name):
             name = name + "/"
-            node = self.tree2.refresh("add",name)
+            node = self.tree2.update("add",name)
             self.Explorer2.clear()
             self.qRefresh2(node)
             
@@ -105,9 +105,9 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
             self.Explorer1.addItem(backItem)
 
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("folderIcon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("Núcleo//folderIcon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("archiveIcon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("Núcleo//archiveIcon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
         for value in a:
             if(value[-1] == "/"):
@@ -117,7 +117,7 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
         for item in items:
             self.Explorer1.addItem(item)
         
-        self.tree1.tsvToFile(self.tree1.root,"Archivo1.tsv")
+        self.tree1.tsvToFile(self.tree1.root,"Memoria//Tree-A.mem")
 
     def qRefresh2(self,node):#***
         a = self.tree2.showMeChildrens(node)
@@ -133,9 +133,9 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
             self.Explorer2.addItem(backItem)
         
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("folderIcon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon1.addPixmap(QtGui.QPixmap("Núcleo//folderIcon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("archiveIcon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
+        icon2.addPixmap(QtGui.QPixmap("Núcleo//archiveIcon.png"), QtGui.QIcon.Normal, QtGui.QIcon.Off)
 
         for value in a:
             if(value[-1] == "/"):
@@ -145,12 +145,12 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
         for item in items:
             self.Explorer2.addItem(item)
 
-        self.tree2.tsvToFile(self.tree2.root,"Archivo2.tsv")
+        self.tree2.tsvToFile(self.tree2.root,"Memoria//Tree-B.mem")
    
     def qAddAr1(self):#***
         name = self.qGetName("archivo")
         if(name):
-            node = self.tree1.refresh("add",name)
+            node = self.tree1.update("add",name)
             self.Explorer1.clear()
             self.qRefresh1(node)
             
@@ -160,7 +160,7 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
     def qAddAr2(self):#***
         name = self.qGetName("archivo")
         if(name):
-            node = self.tree2.refresh("add",name)
+            node = self.tree2.update("add",name)
             self.Explorer2.clear()
             self.qRefresh2(node)
             
@@ -171,7 +171,7 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
         listItems=self.Explorer1.selectedItems()
         if not listItems: return        
         for item in listItems:
-            node = self.tree1.refresh("remove",item.text())
+            node = self.tree1.update("remove",item.text())
         self.Explorer1.clear()
         self.qRefresh1(node)
    
@@ -179,7 +179,7 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
         listItems=self.Explorer2.selectedItems()
         if not listItems: return        
         for item in listItems:
-            node = self.tree2.refresh("remove",item.text())
+            node = self.tree2.update("remove",item.text())
         self.Explorer2.clear()
         self.qRefresh2(node)
 
@@ -189,7 +189,7 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
         listItems = self.Explorer1.selectedItems()
         if not listItems: return   
         for item in listItems:
-            node = self.tree2.refresh("copy",item.text(),self.tree1,self.tree2)
+            node = self.tree2.update("copy",item.text(),self.tree1,self.tree2)
 
         self.Explorer2.clear()
         self.qRefresh2(node)
@@ -198,7 +198,7 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
         listItems = self.Explorer2.selectedItems()
         if not listItems: return   
         for item in listItems:
-            node = self.tree2.refresh("copy",item.text(),self.tree2,self.tree1)
+            node = self.tree2.update("copy",item.text(),self.tree2,self.tree1)
             
         self.Explorer1.clear()
         self.qRefresh1(node)
