@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Compare:
 
     alphabet="/.0123456789aAbBcCdDeEfFgGhHiIjJkKlLmMnNñÑoOpPqQrRsStTuUvVwWxXyYzZ"
