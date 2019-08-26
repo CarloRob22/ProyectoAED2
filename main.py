@@ -7,7 +7,8 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
         QtWidgets.QMainWindow.__init__(self, *args, **kwargs)
         self.setupUi(self)
         #--------------------------------------
-        
+        self.center()
+
         self.treeA = Tree()   #Crear arbol para la lista A
         self.treeA.fileToTree("Memoria//Tree-A.mem") #Leer la memoria del Arbol A 
         self.treeB = Tree()   #Crear arbol para la lista A
@@ -210,8 +211,14 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
             node = self.treeB.update("copy",item.text(),self.treeB,self.treeA)
             
         self.Explorer1.clear()
-        self.qRefresh1(node)   
+        self.qRefresh1(node) 
 
+    def center(self):
+        qRect = self.frameGeometry()
+        centerPoint = QtWidgets.QDesktopWidget().availableGeometry().center()
+        print(centerPoint)
+        qRect.moveCenter(centerPoint)
+        self.move(qRect.topLeft()) 
    
 #------------------------------------
 if __name__ == "__main__":
