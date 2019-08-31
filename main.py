@@ -123,8 +123,14 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
                 items.append(QtWidgets.QListWidgetItem(icon1,value))   #Crear/Agregar al arreglo un item del valor actual y respectivo icono
             else:   #en Caso de ser Archivo
                 items.append(QtWidgets.QListWidgetItem(icon2,value))   #Crear/Agregar al arreglo un item del valor actual y respectivo icono
+        archives = []
         for item in items:
-            self.Explorer1.addItem(item)   #Añadir los items a la pantalla 
+            if(item.text()[-1]=="/"):
+                self.Explorer1.addItem(item)   #Añadir primero los folders a la QlistWidget 
+            else:
+                archives.append(item)  #Guardar Temporalmente los archivos  
+        for archive in archives:
+            self.Explorer1.addItem(archive)  #Añadir de segundo los archivos a la QlistWidget 
         
         self.treeA.treeToFile("Memoria//Tree-A.mem")   #Guardar el cambio en memoria
 
@@ -151,8 +157,14 @@ class MainWindowUser(QtWidgets.QMainWindow, Ui_MainWindow):
                 items.append(QtWidgets.QListWidgetItem(icon1,value))
             else:
                 items.append(QtWidgets.QListWidgetItem(icon2,value))
+        archives = []
         for item in items:
-            self.Explorer2.addItem(item)
+            if(item.text()[-1]=="/"):
+                self.Explorer2.addItem(item)
+            else:
+                archives.append(item)
+        for archive in archives:
+            self.Explorer2.addItem(archive) 
 
         self.treeB.treeToFile("Memoria//Tree-B.mem")
    
