@@ -64,7 +64,17 @@ class Graph:
         nx.draw(G,pos,with_labels = True, node_size=500)
         plt.show()
 
-
+    def buildGraph(self,txtPlain):
+        content = iter(txtPlain.split("\n"))
+        last = " "
+        for line in content:
+            if(line == ""): break
+            if line.count("\t") == 0:
+                self.addVertex(line.lstrip("\t"))
+                last = line.lstrip("\t")
+            if line.count("\t") == 1:
+                self.addEdge(last,line.lstrip("\t"),Characteristic( int(next(content).lstrip("\t")) ) ) #cambiar 
+        
     #con derecho de autor 
 '''
     def findPaths(self, graph, vertex, destination, path = [], visited = []):

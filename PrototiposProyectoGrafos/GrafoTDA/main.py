@@ -1,49 +1,90 @@
-from form import *
+from mainwindow import *
+from login import *
 from Graph import *
-from Characteristic import Characteristic
-class MainWindow(QtWidgets.QMainWindow,Ui_Form):
+
+
+class mainwindow(QtWidgets.QMainWindow,Ui_MainWindow):
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
         self.setupUi(self)
-        self.pushButton.clicked.connect(self.openFile)
-        self.graph = Graph()
-        self.content = ""
+        self.editor.textChanged.connect(self.enabledButtons)
+        self.fileName = None
+        self.save.clicked.connect(self.saveFile)
+        self.saveAs.clicked.connect(self.saveAsFile)
+        self.makeGraph.clicked.connect(self.buildGraph)
+        self.openFile.clicked.connect(self.openAFile)
 
-    def openFile(self):
+    def openAFile(self):
         explorer = QtWidgets.QFileDialog()
-        directory = explorer.directory().canonicalPath()
-        print(directory)
-        name,typeFile = explorer.getOpenFileName(self,"Open File",directory,"Texto(*.txt)")
-        file = open(name,"r")
-        self.content = file.read()
+        currentDir = explorer.directory().canonicalPath()
+        name, typefilter = explorer.getOpenFileName(None, "Open File", currentDir, "Text (*.txt)")
+        file = open(name)
+        content = file.read()
         file.close()
-        self.textEdit.append(self.content)
-        self.createGraphWChars()
+        self.editor.setText(content)
+        self.disableButtons()
 
-    def createGraph(self):
-        content = self.content.split("\n")
-        for i in range(len(content)-1):
-            if content[i].count("\t") == 0:
-                self.graph.addVertex(content[i].lstrip("\t"))
-            if content[i+1].count("\t") == content[i].count("\t")+1:
-                for j in range(i+1,len(content)-1):
-                    self.graph.addEdge(content[i].lstrip("\t"),content[j].lstrip("\t"))
-                    if content[j+1].count("\t") == content[i].count("\t"):
-                        break
-        self.graph.showGraph()
-        
-    def createGraphWChars(self):
-        content = iter(self.content.split("\n"))
+    def buildGraph(self):
+        graph = Graph()
+        graph.buildGraph(self.editor.toPlainText())
+        graph.showGraph()
 
-        last = " "
-        for line in content:
-            if(line == ""): break
-            if line.count("\t") == 0:
-                self.graph.addVertex(line.lstrip("\t"))
-                last = line.lstrip("\t")
-            if line.count("\t") == 1:
-                self.graph.addEdge(last,line.lstrip("\t"),Characteristic( int(next(content).lstrip("\t")) ) ) #cambiar 
-        self.graph.showGraph()
+    def saveAsFile(self):
+        filename,_ = QtWidgets.QFileDialog.getSaveFileName(None,"Save As","","Text(*.txt)")
+        content = self.editor.toPlainText()
+        file = open(filename,"w")
+        file.write(content)
+        file.close()
+        self.fileName = filename
+        self.disableButtons()
+
+    def saveFile(self):
+        content = self.editor.toPlainText()
+        file = open(self.fileName,"w")
+        file.write(content)
+        file.close()
+        self.disableButtons()
+
+    def enabledButtons(self):
+        if self.fileName:
+            self.save.setEnabled(True)
+        self.saveAs.setEnabled(True)
+
+    def disableButtons(self):
+        self.save.setEnabled(False)
+        self.saveAs.setEnabled(False)
+
+class MainWindow(QtWidgets.QMainWindow,Ui_Login):
+    def __init__(self):
+        QtWidgets.QMainWindow.__init__(self)
+        self.setupUi(self)
+        self.openFileLogin.clicked.connect(self.loginOpenFile)
+        self.mainWindow = mainwindow()
+        self.newFileLogin.clicked.connect(self.loginNewFile)
+
+    def loginNewFile(self):
+        self.hide()
+        self.mainWindow.show()
+        self.mainWindow.save.setEnabled(False)
+        self.mainWindow.saveAs.setEnabled(False)
+
+    def loginOpenFile(self):
+        self.hide()
+        explorer = QtWidgets.QFileDialog()
+        currentDir = explorer.directory().canonicalPath()
+        name,typefilter = explorer.getOpenFileName(None,"Open File",currentDir,"Text (*.txt)")
+        file = open(name)
+        content = file.read()
+        file.close()
+        self.mainWindow.editor.setText(content)
+        self.mainWindow.fileName=name
+        self.mainWindow.save.setEnabled(False)
+        self.mainWindow.saveAs.setEnabled(False)
+        self.showMain()
+
+    def showMain(self):
+        self.hide()
+        self.mainWindow.show()
 
 if __name__=="__main__":
     apt = QtWidgets.QApplication([])
