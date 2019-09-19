@@ -12,6 +12,17 @@ class mainwindow(QtWidgets.QMainWindow,Ui_MainWindow):
         self.save.clicked.connect(self.saveFile)
         self.saveAs.clicked.connect(self.saveAsFile)
         self.makeGraph.clicked.connect(self.buildGraph)
+        self.openFile.clicked.connect(self.openAFile)
+
+    def openAFile(self):
+        explorer = QtWidgets.QFileDialog()
+        currentDir = explorer.directory().canonicalPath()
+        name, typefilter = explorer.getOpenFileName(None, "Open File", currentDir, "Text (*.txt)")
+        file = open(name)
+        content = file.read()
+        file.close()
+        self.editor.setText(content)
+        self.disableButtons()
 
     def buildGraph(self):
         graph = Graph()
