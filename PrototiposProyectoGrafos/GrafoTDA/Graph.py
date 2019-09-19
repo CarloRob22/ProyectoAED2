@@ -91,7 +91,7 @@ class Graph:
                 s["%s" % current.value.name] = None
             current = current.next
         return list(s.keys())
-'''       
+      
 x = "A"
 g = Graph()
 g.addVertex("A")
@@ -113,3 +113,4 @@ print(g.vertices.first.value.edges)
 print("Las rutas de %s son  %s" % (x,g.connectedVertices(x)) ) 
 print(g.getGraph())
 g.showGraph()
+'''
