@@ -1,7 +1,5 @@
 Server1
 	Server2
-	    distancia:12
-	    
 	Server3
 	Server4
 Server2
