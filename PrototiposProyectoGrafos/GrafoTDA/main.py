@@ -42,7 +42,7 @@ class MainWindow(QtWidgets.QMainWindow,Ui_Form):
                 self.graph.addVertex(line.lstrip("\t"))
                 last = line.lstrip("\t")
             if line.count("\t") == 1:
-                self.graph.addEdge(last,line.lstrip("\t"),Characteristic(int(next(content).lstrip("\t"))))
+                self.graph.addEdge(last,line.lstrip("\t"),Characteristic( int(next(content).lstrip("\t")) ) ) #cambiar 
         self.graph.showGraph()
 
 if __name__=="__main__":

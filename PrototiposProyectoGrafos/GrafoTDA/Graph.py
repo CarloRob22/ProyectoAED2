@@ -3,6 +3,8 @@ from Vertex import Vertex
 from Characteristic import Characteristic
 import networkx as nx
 import matplotlib.pyplot as plt
+
+
 class Graph:
 
     def __init__(self):
@@ -27,33 +29,44 @@ class Graph:
                     if(edge.name == x):
                         s["%s" % vertex.name] = "%s" % edge.weight
         return s
+    def connectedVerticesOfX(self,x):
+        s = {}
+        vertex_x = self.vertices.search(x)
+        for edge in vertex_x.edges:
+            s["%s" % edge.name] = "%s" % edge.weight
+        return s
    
     def getGraph(self):
         for vertex in self.vertices:
-            self.graph[vertex.name] = self.connectedVertices(vertex.name)
+            self.graph[vertex.name] = self.connectedVerticesOfX(vertex.name)
         
         return self.graph
 
     def showGraph(self):
-        G = nx.Graph()
+        G = nx.DiGraph()
+        
         self.graph = self.getGraph()
         for v,edges in self.graph.items():
             G.add_node("%s" % (v))
 
             for e,w in edges.items():
                 G.add_node("%s" % (e))
-                #print(w)
                 G.add_edge("%s" % v,"%s" % e,weight=w)
                 #print("'%s' se conceta con '%s'" % (v,e))
         
-        position = nx.spring_layout(G)
-        labels={(vertex1,vertex2): weigth["weight"] for vertex1,vertex2,weigth in G.edges(data=True)}
-        nx.draw(G,position, with_labels=True)
-        nx.draw_networkx_edge_labels(G,position,edge_labels=labels,font_color="red")
+        edge_labels=dict([((u,v,),d['weight'])
+                      for u,v,d in G.edges(data=True)])
+        
+        pos=nx.circular_layout(G)
+        nx.draw_networkx_edge_labels(G,pos,edge_labels=edge_labels,edge_color = 'b',
+        arrowsize=20, arrowstyle='fancy',font_color="red")
+
+        nx.draw(G,pos,with_labels = True, node_size=500)
         plt.show()
-    
+
+
     #con derecho de autor 
-    '''
+'''
     def findPaths(self, graph, vertex, destination, path = [], visited = []):
         #Agrego el vertice actual a la ruta y lo marco como visitado(para evitar ciclos)
         visited.append(vertex)

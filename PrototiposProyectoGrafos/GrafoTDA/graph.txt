@@ -1,15 +1,17 @@
-Server1
-	Server2
+A
+	B
 		4
-	Server3
+	C
 		3
-	Server5
+	E
 		5
-Server2
-	Server4
+B
+	D
 		1
-Server3
-Server4
-	Server3
+C
+D
+	C
 		34
-Server5
+E
+	A
+		36	
