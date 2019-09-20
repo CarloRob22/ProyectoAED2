@@ -50,7 +50,7 @@ class Graph:
             G.add_node("%s" % (v))
 
             for e,w in edges.items():
-                G.add_node("%s" % (e))
+                #G.add_node("%s" % (e))
                 G.add_edge("%s" % v,"%s" % e,weight=w)
                 #print("'%s' se conceta con '%s'" % (v,e))
         
