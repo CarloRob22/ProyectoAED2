@@ -12,6 +12,7 @@ class Graph:
         self.graph = {}
     
     def addVertex(self,nameVertex):
+        print("se agrega: %s" % nameVertex)
         self.vertices.add(Vertex(nameVertex))
 
     def addEdge(self,nameVertexOrigin,nameVertexDestination,characteristic = Characteristic()):
@@ -48,11 +49,9 @@ class Graph:
         self.graph = self.getGraph()
         for v,edges in self.graph.items():
             G.add_node("%s" % (v))
-
-            for e,w in edges.items():
-                G.add_node("%s" % (e))
-                G.add_edge("%s" % v,"%s" % e,weight=w)
-                #print("'%s' se conceta con '%s'" % (v,e))
+            if(edges):
+                for e,w in edges.items():
+                    G.add_edge("%s" % v,"%s" % e,weight=w)
         
         edge_labels=dict([((u,v,),d['weight'])
                       for u,v,d in G.edges(data=True)])
@@ -63,8 +62,11 @@ class Graph:
 
         nx.draw(G,pos,with_labels = True, node_size=500)
         plt.savefig("graph.png")
+        plt.close()
 
     def buildGraph(self,txtPlain):
+        self.graph = {}
+        self.vertices = LinkedList()
         content = iter(txtPlain.split("\n"))
         last = " "
         for line in content:
@@ -74,7 +76,7 @@ class Graph:
                 last = line.lstrip("\t")
             if line.count("\t") == 1:
                 self.addEdge(last,line.lstrip("\t"),Characteristic( int(next(content).lstrip("\t")) ) ) #cambiar 
-        
+
     #con derecho de autor 
 '''
     def findPaths(self, graph, vertex, destination, path = [], visited = []):

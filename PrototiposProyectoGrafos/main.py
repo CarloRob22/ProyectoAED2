@@ -3,6 +3,7 @@ from Graph import *
 from embeddedimageGUI import *
 
 
+
 class EnbeddedImageWindow(QtWidgets.QMainWindow,Ui_ImageWindow):
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
