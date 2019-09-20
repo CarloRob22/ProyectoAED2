@@ -21,10 +21,11 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
         explorer = QtWidgets.QFileDialog()
         currentDir = explorer.directory().canonicalPath()
         name, typefilter = explorer.getOpenFileName(None, "Open File", currentDir, "Text (*.txt)")
-        file = open(name)
-        content = file.read()
-        file.close()
-        self.editor.setText(content)
+        if(typefilter):
+            file = open(name)
+            content = file.read()
+            file.close()
+            self.editor.setText(content)
 
     def buildGraph(self):
         graph = Graph()
