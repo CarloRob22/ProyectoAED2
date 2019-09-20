@@ -1,36 +1,42 @@
-from form import *
+from mainWindowGUI import *
 from Graph import *
+from embeddedimageGUI import *
 
-class MainWindow(QtWidgets.QMainWindow,Ui_Form):
+
+class EnbeddedImageWindow(QtWidgets.QMainWindow,Ui_ImageWindow):
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
         self.setupUi(self)
-        self.pushButton.clicked.connect(self.openFile)
-        self.graph = Graph()
-        self.content = ""
 
-    def openFile(self):
+
+class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
+    def __init__(self):
+        QtWidgets.QMainWindow.__init__(self)
+        self.setupUi(self)
+        self.makeGraphButton.clicked.connect(self.buildGraph)
+        self.openFileButton.clicked.connect(self.openAFile)
+        self.windowImage = EnbeddedImageWindow()
+
+    def openAFile(self):
         explorer = QtWidgets.QFileDialog()
-        directory = explorer.directory().canonicalPath()
-        print(directory)
-        name,typeFile = explorer.getOpenFileName(self,"Open File",directory,"Texto(*.txt)")
-        file = open(name,"r")
-        self.content = file.read()
+        currentDir = explorer.directory().canonicalPath()
+        name, typefilter = explorer.getOpenFileName(None, "Open File", currentDir, "Text (*.txt)")
+        file = open(name)
+        content = file.read()
         file.close()
-        self.textEdit.append(self.content)
-        self.createGraph()
+        self.editor.setText(content)
 
-    def createGraph(self):
-        content = self.content.split("\n")
-        for i in range(len(content)-1):
-            if content[i].count("\t") == 0:
-                self.graph.addVertex(content[i].lstrip("\t"))
-            if content[i+1].count("\t") == content[i].count("\t")+1:
-                for j in range(i+1,len(content)-1):
-                    self.graph.addEdge(content[i].lstrip("\t"),content[j].lstrip("\t"))
-                    if content[j+1].count("\t") == content[i].count("\t"):
-                        break
-        self.graph.showDraw()
+    def buildGraph(self):
+        graph = Graph()
+        graph.buildGraph(self.editor.toPlainText())
+        graph.makeGraph()
+        self.showGraph()
+
+    def showGraph(self):
+        self.windowImage.setStyleSheet("background-image: url(%s)" % "graph.png")
+        self.windowImage.show()
+
+
 if __name__=="__main__":
     apt = QtWidgets.QApplication([])
     window = MainWindow()

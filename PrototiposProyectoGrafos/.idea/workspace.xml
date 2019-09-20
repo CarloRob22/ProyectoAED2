@@ -2,8 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3a845434-3d6a-4e82-904e-acd54744401c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/embeddedimageGUI.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/principal.py" beforeDir="false" afterPath="$PROJECT_DIR$/principal.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrafoTDA/Characteristic.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrafoTDA/Edge.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrafoTDA/Graph.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrafoTDA/LinkedList.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrafoTDA/Node.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrafoTDA/Vertex.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrafoTDA/form.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrafoTDA/graph.txt" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrafoTDA/login.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrafoTDA/main.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrafoTDA/mainwindow.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Graph.py" beforeDir="false" afterPath="$PROJECT_DIR$/Graph.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/form.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/graph.txt" beforeDir="false" afterPath="$PROJECT_DIR$/graph.txt" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/login.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainwindow.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/mainwindow.ui" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/principal.py" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -31,7 +51,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.principal">
+  <component name="RunManager" selected="Python.main">
     <configuration name="main" type="PythonConfigurationType" factoryName="Python" nameIsGenerated="true">
       <module name="PrototiposProyectoGrafos" />
       <option name="INTERPRETER_OPTIONS" value="" />
