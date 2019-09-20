@@ -16,7 +16,7 @@ class Ui_MainWindow(object):
         MainWindow.resize(800, 600)
         self.centralwidget = QtWidgets.QWidget(MainWindow)
         self.centralwidget.setObjectName("centralwidget")
-        self.editor = QtWidgets.QTextBrowser(self.centralwidget)
+        self.editor = QtWidgets.QTextEdit(self.centralwidget)
         self.editor.setGeometry(QtCore.QRect(40, 70, 491, 511))
         self.editor.setObjectName("editor")
         self.label = QtWidgets.QLabel(self.centralwidget)
