@@ -12,7 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_ImageWindow(object):
     def setupUi(self, ImageWindow):
-        ImageWindow.setObjectName("ImageWindow")
+        ImageWindow.setObjectName("Mapa (Grafo)")
         ImageWindow.resize(640, 480)
         sizePolicy = QtWidgets.QSizePolicy(QtWidgets.QSizePolicy.Fixed, QtWidgets.QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
@@ -30,7 +30,7 @@ class Ui_ImageWindow(object):
 
     def retranslateUi(self, ImageWindow):
         _translate = QtCore.QCoreApplication.translate
-        ImageWindow.setWindowTitle(_translate("ImageWindow", "MainWindow"))
+        ImageWindow.setWindowTitle(_translate("Mapa (Grafo)", "Mapa (Grafo)"))
 
 
 if __name__ == "__main__":

@@ -10,7 +10,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_Form(object):
     def setupUi(self, Form):
-        Form.setObjectName("Form")
+        Form.setObjectName("Tabla (Rutas)")
         Form.resize(400, 346)
         self.textEdit = QtWidgets.QTextEdit(Form)
         self.textEdit.setGeometry(QtCore.QRect(10, 10, 381, 331))
@@ -21,7 +21,7 @@ class Ui_Form(object):
 
     def retranslateUi(self, Form):
         _translate = QtCore.QCoreApplication.translate
-        Form.setWindowTitle(_translate("Form", "Form"))
+        Form.setWindowTitle(_translate("Tabla (Rutas)", "Tabla (Rutas)"))
 
 
 if __name__ == "__main__":
