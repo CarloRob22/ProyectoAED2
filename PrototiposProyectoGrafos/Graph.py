@@ -121,7 +121,7 @@ class Graph:
             elif not i.name in searching:
                 self.getRoads(i.name,toVertex.name,searching)
 
-
+'''
 g = Graph()
 file = open("graph.txt")
 content = file.read()
@@ -129,3 +129,4 @@ file.close()
 g.buildGraph(content)
 g.makeGraph()
 g.getRoads("A","C")
+'''

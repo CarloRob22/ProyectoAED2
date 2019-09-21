@@ -1,0 +1,53 @@
+A
+	B
+		distancia:300
+		anchoDeBanda:20
+		usuariosConectados:5
+		cantidadDeTrafico:7
+		tipoDeMedio:CAT5
+	E
+		distancia:300
+		anchoDeBanda:20
+		usuariosConectados:5
+		cantidadDeTrafico:7
+		tipoDeMedio:CAT5
+	C
+		distancia:300
+		anchoDeBanda:20
+		usuariosConectados:5
+		cantidadDeTrafico:7
+		tipoDeMedio:CAT5
+B
+	E
+		distancia:300
+		anchoDeBanda:20
+		usuariosConectados:5
+		cantidadDeTrafico:7
+		tipoDeMedio:CAT5
+	C
+		distancia:300
+		anchoDeBanda:20
+		usuariosConectados:5
+		cantidadDeTrafico:7
+		tipoDeMedio:CAT5
+C
+	D
+		distancia:200
+		anchoDeBanda:15
+		usuariosConectados:4
+		cantidadDeTrafico:5
+		tipoDeMedio:Coaxial
+	E
+		distancia:300
+		anchoDeBanda:20
+		usuariosConectados:5
+		cantidadDeTrafico:7
+		tipoDeMedio:CAT5
+	B
+		distancia:300
+		anchoDeBanda:20
+		usuariosConectados:5
+		cantidadDeTrafico:7
+		tipoDeMedio:CAT5
+D
+E

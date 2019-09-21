@@ -17,6 +17,7 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
         self.makeGraphButton.clicked.connect(self.buildGraph)
         self.openFileButton.clicked.connect(self.openAFile)
         self.windowImage = EnbeddedImageWindow()
+        self.makeTableButton.clicked.connect( self.getRouteInTerminal)
 
     def openAFile(self):
         explorer = QtWidgets.QFileDialog()
@@ -38,7 +39,13 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
         self.windowImage.setStyleSheet("background-image: url(%s)" % "graph.png")
         self.windowImage.show()
 
-
+    def getRouteInTerminal(self):
+        graph = Graph()
+        graph.buildGraph(self.editor.toPlainText())
+        x = self.initialServer.text()
+        y = self.finalServer.text()
+        graph.getRoads(x,y)
+        
 if __name__=="__main__":
     apt = QtWidgets.QApplication([])
     window = MainWindow()
