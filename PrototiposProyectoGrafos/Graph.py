@@ -1,6 +1,6 @@
 from LinkedList import LinkedList
 from Vertex import Vertex
-from Characteristic import Characteristic
+from Attribute import Attribute
 import networkx as nx
 import matplotlib.pyplot as plt
 
@@ -12,12 +12,11 @@ class Graph:
         self.graph = {}
     
     def addVertex(self,nameVertex):
-        print("se agrega: %s" % nameVertex)
         self.vertices.add(Vertex(nameVertex))
 
-    def addEdge(self,nameVertexOrigin,nameVertexDestination,characteristic = Characteristic()):
+    def addEdge(self,nameVertexOrigin,nameVertexDestination,attribute = Attribute()):
         vertexOrigin = self.vertices.search(nameVertexOrigin)
-        vertexOrigin.setEdge(nameVertexDestination,characteristic)
+        vertexOrigin.setEdge(nameVertexDestination,attribute)
 
     def connectedVertices(self,x):
         s = {}
@@ -65,17 +64,26 @@ class Graph:
         plt.close()
 
     def buildGraph(self,txtPlain):
-        self.graph = {}
-        self.vertices = LinkedList()
+        #self.graph = {}
+        #self.vertices = LinkedList()
         content = iter(txtPlain.split("\n"))
-        last = " "
+        lastVertex = ""
+        destVertex = ""
         for line in content:
             if(line == ""): break
             if line.count("\t") == 0:
                 self.addVertex(line.lstrip("\t"))
-                last = line.lstrip("\t")
+                lastVertex = line.lstrip("\t")
             if line.count("\t") == 1:
-                self.addEdge(last,line.lstrip("\t"),Characteristic( int(next(content).lstrip("\t")) ) ) #cambiar 
+                destVertex = line.lstrip("\t")
+                prop = []
+                for _ in range(5):
+                    value = next(content).lstrip("\t")
+                    prop.append(value.split(":"))
+                    print(prop)
+                attribute = Attribute(prop[0][1],prop[1][1],prop[2][1],prop[3][1],prop[4][1])
+                print(prop)
+                self.addEdge(lastVertex,destVertex,attribute) 
 
     #con derecho de autor 
 '''
@@ -125,12 +133,12 @@ g.addVertex("B")
 g.addVertex("C")
 g.addVertex("D")
 g.addVertex("E")
-g.addEdge("A","C",Characteristic(2))
-g.addEdge("A","C",Characteristic(1))
-g.addEdge("A","B",Characteristic(3))
-g.addEdge("B","D",Characteristic(4))
-g.addEdge("D","A",Characteristic(5))
-g.addEdge("E","B",Characteristic(6))
+g.addEdge("A","C",Attribute(2))
+g.addEdge("A","C",Attribute(1))
+g.addEdge("A","B",Attribute(3))
+g.addEdge("B","D",Attribute(4))
+g.addEdge("D","A",Attribute(5))
+g.addEdge("E","B",Attribute(6))
 
 print(g.vertices)
 print(g.vertices.first.value.edges)

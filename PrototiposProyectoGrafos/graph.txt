@@ -1,17 +1,28 @@
 A
-	B
-		4
-	C
-		3
-	E
-		5
 B
-	D
-		1
-C
-D
-	C
-		34
-E
 	A
-		36	
+		distancia:300
+		anchoDeBanda:20
+		usuariosConectados:5
+		cantidadDeTrafico:7
+		tipoDeMedio:CAT5
+C
+	B
+		distancia:200
+		anchoDeBanda:15
+		usuariosConectados:4
+		cantidadDeTrafico:5
+		tipoDeMedio:Coaxial
+D
+	A
+		distancia:120
+		anchoDeBanda:50
+		usuariosConectados:10
+		cantidadDeTrafico:9
+		tipoDeMedio:Par-Trenzado
+	B
+		distancia:100
+		anchoDeBanda:30
+		usuariosConectados:8
+		cantidadDeTrafico:9
+		tipoDeMedio:CAT6
