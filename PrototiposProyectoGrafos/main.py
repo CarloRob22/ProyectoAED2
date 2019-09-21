@@ -21,7 +21,7 @@ class EnbeddedImageWindow(QtWidgets.QMainWindow,Ui_ImageWindow):
         frame.moveCenter(centerPoint)
         self.move(frame.topLeft())
 
-class RouteTable(QtWidgets.QMainWindow,Ui_ImageWindow):
+class RouteTable(QtWidgets.QMainWindow,Ui_Form):
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
         self.setupUi(self) 
