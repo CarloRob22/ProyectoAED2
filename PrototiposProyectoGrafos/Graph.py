@@ -96,9 +96,9 @@ class Graph:
                 attribute = Attribute(prop[0][1],prop[1][1],prop[2][1],prop[3][1],prop[4][1]) #crea los atributos de la arista
                 self.addEdge(lastVertex,destVertex,attribute) #Agrega la arista a la lista enlazada del ultimo vertice
 
-    # Método "privado" que retorna una lista con las rutas de fromVertex a toVertex, retorna rutas repetidas
+# Método "privado" que retorna una lista con las rutas de fromVertex a toVertex, retorna rutas repetidas
 
-        # Método "privado" que retorna una lista con las rutas de fromVertex a toVertex, retorna rutas repetidas
+# Método "privado" que retorna una lista con las rutas de fromVertex a toVertex, retorna rutas repetidas
 
     def __getRoads(self, fromVertex, toVertex, searching=None, roads=None):
         if self.vertices.search(fromVertex) and self.vertices.search(toVertex):
