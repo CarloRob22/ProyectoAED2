@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from mainWindowGUI import *
 from Graph import *
 from embeddedimageGUI import *
