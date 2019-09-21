@@ -2,22 +2,40 @@ from mainWindowGUI import *
 from Graph import *
 from embeddedimageGUI import *
 
-
++
 
 class EnbeddedImageWindow(QtWidgets.QMainWindow,Ui_ImageWindow):
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
         self.setupUi(self)
+        self.center()
+
+    # Este metodo centra la ventana
+
+    def center(self):
+        frame = self.frameGeometry()
+        centerPoint = QtWidgets.QDesktopWidget().availableGeometry().center()
+        frame.moveCenter(centerPoint)
+        self.move(frame.topLeft())
 
 
 class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
         self.setupUi(self)
+        self.center()
         self.makeGraphButton.clicked.connect(self.buildGraph)
         self.openFileButton.clicked.connect(self.openAFile)
         self.windowImage = EnbeddedImageWindow()
-        self.makeTableButton.clicked.connect( self.getRouteInTerminal)
+        self.makeTableButton.clicked.connect( self.buildTable)
+
+    # Este metodo centra la ventana
+
+    def center(self):
+        frame = self.frameGeometry()
+        centerPoint = QtWidgets.QDesktopWidget().availableGeometry().center()
+        frame.moveCenter(centerPoint)
+        self.move(frame.topLeft())
 
     def openAFile(self):
         explorer = QtWidgets.QFileDialog()
@@ -51,6 +69,31 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
                 for k,v in s.items():
                     print("Ruta: %s, Peso: %s" % (roads[k],v))
                 print("-"*50)
+
+    def buildTable(self):
+        content = []
+        graph = Graph()
+        graph.buildGraph(self.editor.toPlainText())
+        x = self.initialServer.text()
+        y = self.finalServer.text()
+        roads = graph.getRoads(x,y)
+        if roads:
+            roadWeigth = graph.getWeigthOfRoads(roads)
+
+            invertedRoadWeigth = dict((v, k) for k, v in roadWeigth.items())
+
+            sortedWeigths = list(invertedRoadWeigth.keys())
+            sortedWeigths.sort()
+
+            content.append("-"*50)
+            content.append("Tabla de rutas de %s a %s" %(x,y))
+            content.append("-"*50)
+            content.append("Peso|ruta")
+            for i in sortedWeigths:
+                content.append("-" * 50)
+                content.append("%s|%s" % (i,roads[invertedRoadWeigth[i]]))
+
+            print("\n".join(content))
 
 if __name__=="__main__":
     apt = QtWidgets.QApplication([])
