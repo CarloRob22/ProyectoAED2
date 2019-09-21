@@ -2,6 +2,10 @@
 from mainWindowGUI import *
 from Graph import *
 from embeddedimageGUI import *
+from RouteTable import *
+from PyQt5 import uic
+
+
 
 class EnbeddedImageWindow(QtWidgets.QMainWindow,Ui_ImageWindow):
     def __init__(self):
@@ -17,6 +21,14 @@ class EnbeddedImageWindow(QtWidgets.QMainWindow,Ui_ImageWindow):
         frame.moveCenter(centerPoint)
         self.move(frame.topLeft())
 
+class RouteTable(QtWidgets.QMainWindow,Ui_ImageWindow):
+    def __init__(self):
+        QtWidgets.QMainWindow.__init__(self)
+        self.setupUi(self) 
+        self.setWindowTitle("Route Table")
+        self.setMaximumSize(16777215,16777215)
+        self.setMinimumSize(16777215,16777215)
+
 class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
     def __init__(self):
         QtWidgets.QMainWindow.__init__(self)
@@ -25,9 +37,9 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
         self.makeGraphButton.clicked.connect(self.buildGraph)
         self.openFileButton.clicked.connect(self.openAFile)
         self.windowImage = EnbeddedImageWindow()
+        self.makeTableButton.clicked.connect( self.buildTable)
         self.Form = RouteTable()
-        #self.makeTableButton.clicked.connect( self.buildTable)
-
+        
     # Este metodo centra la ventana
 
     def center(self):
