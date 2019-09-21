@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from mainWindowGUI import *
 from Graph import *
 from embeddedimageGUI import *
@@ -36,6 +37,7 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
         self.makeGraphButton.clicked.connect(self.buildGraph)
         self.openFileButton.clicked.connect(self.openAFile)
         self.windowImage = EnbeddedImageWindow()
+        self.windowImage2 = RouteTable()
         self.makeTableButton.clicked.connect( self.buildTable)
 
     # Este metodo centra la ventana
@@ -66,6 +68,10 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
         self.windowImage.setStyleSheet("background-image: url(%s)" % "graph.png")
         self.windowImage.show()
 
+    def showTable(self,content):
+        self.windowImage2.textEdit.setText(content)
+        self.windowImage2.show()
+
     def getRouteInTerminal(self):
         graph = Graph()
         graph.buildGraph(self.editor.toPlainText())
@@ -95,16 +101,16 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
             sortedWeigths = list(invertedRoadWeigth.keys())
             sortedWeigths.sort()
 
-            content.append("-"*50)
-            content.append("Tabla de rutas de %s a %s" %(x,y))
-            content.append("-"*50)
-            content.append("Peso|ruta")
+            content.append("-"*80)
+            content.append("\tTabla de rutas de %s a %s" %(x,y))
+            content.append("-"*80)
+            content.append("\tPeso\t|\tRuta")
             for i in sortedWeigths:
-                content.append("-" * 50)
-                content.append("%s|%s" % (i,roads[invertedRoadWeigth[i]]))
+                content.append("-" * 80)
+                content.append("\t%s\t|\t%s" % (i,roads[invertedRoadWeigth[i]]))
 
-            print("\n".join(content))
-
+            self.showTable("\n".join(content))
+    
 if __name__=="__main__":
     apt = QtWidgets.QApplication([])
     window = MainWindow()
