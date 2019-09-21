@@ -11,7 +11,7 @@ class Graph:
         self.vertices = LinkedList()
         self.graph = {}
 
-    '''Agrega vertices a la lista de la instancia grafo'''
+    '''Agrega vertices a la instancia listaEnlazada del grafo'''
     def addVertex(self,nameVertex): 
         self.vertices.add(Vertex(nameVertex))
 

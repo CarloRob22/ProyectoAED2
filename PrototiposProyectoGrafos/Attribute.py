@@ -35,7 +35,6 @@ class Attribute:
         return CDM
 
     def getConstant(self):
-        print(self.mediaType)
         if(self.mediaType=="CAT5"):
             return (0.98,0.02,50)
         elif(self.mediaType=="CAT6"):
