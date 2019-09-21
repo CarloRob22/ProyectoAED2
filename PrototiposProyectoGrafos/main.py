@@ -45,7 +45,12 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
         x = self.initialServer.text()
         y = self.finalServer.text()
         if(x != "" and y != ""):
-            graph.getRoads(x,y)
+            roads = graph.getRoads(x,y)
+            if(roads):
+                s = graph.getWeigthOfRoads(roads)
+                for k,v in s.items():
+                    print("Ruta: %s, Peso: %s" % (roads[k],v))
+                print("-"*50)
 
 if __name__=="__main__":
     apt = QtWidgets.QApplication([])

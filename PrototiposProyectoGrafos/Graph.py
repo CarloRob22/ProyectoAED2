@@ -126,7 +126,9 @@ class Graph:
                     roads.append(list(road.keys()))
                 elif i.name not in searching:
                     self.__getRoads(i.name, toVertex.name, searching, roads)
-        return roads
+            return roads
+        else:
+            return None
 
     # Método que se encarga de eliminar las repeticiones de __getRoads, este es el que debe ser
     # llamado cuando se quiren las rutas entre dos nodos, retorna una lista de tuplas, donde cada
@@ -139,12 +141,14 @@ class Graph:
             for i in roads:
                 routes[tuple(i)] = None
             return list(routes.keys())
-
+    
+    #Apartir del nombre del vertice origen y destino obtiene el peso de la arista que las une
     def getWeigthOfEdge(self,fromVertex,toVertex):
         fromVertex = self.vertices.search(fromVertex)
         edge =  fromVertex.edges.search(toVertex)
         return edge.weight
 
+    #Apartir de un arreglo que contenga las rutas en forma de tupla o arreglo se obtiene el peso total de la ruta
     def getWeigthOfRoads(self,roads):
         RoadsAndWeith = {}
         count = 0
@@ -161,7 +165,7 @@ class Graph:
         return RoadsAndWeith
 
 
-
+'''
 g = Graph()
 file = open("graph.txt")
 content = file.read()
@@ -172,3 +176,4 @@ road = g.getRoads("A","E")
 s = g.getWeigthOfRoads(road)
 for k,v in s.items():
     print("ruta: %s peso: %s" % (road[k],v))
+'''
