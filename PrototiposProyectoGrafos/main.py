@@ -41,7 +41,7 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
         self.makeGraphButton.clicked.connect(self.buildGraph)
         self.openFileButton.clicked.connect(self.openAFile)
         self.windowImage = EnbeddedImageWindow()
-        self.windowImage2 = RouteTable()
+        self.Form = RouteTable()
         self.makeTableButton.clicked.connect( self.buildTable)
 
     # Este metodo centra la ventana
@@ -73,8 +73,8 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
         self.windowImage.show()
 
     def showTable(self,content):
-        self.windowImage2.textEdit.setText(content)
-        self.windowImage2.show()
+        self.Form.textEdit.setText(content)
+        self.Form.show()
 
     def getRouteInTerminal(self):
         graph = Graph()
