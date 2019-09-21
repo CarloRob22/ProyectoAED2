@@ -96,83 +96,56 @@ class Graph:
                 attribute = Attribute(prop[0][1],prop[1][1],prop[2][1],prop[3][1],prop[4][1]) #crea los atributos de la arista
                 self.addEdge(lastVertex,destVertex,attribute) #Agrega la arista a la lista enlazada del ultimo vertice
 
-<<<<<<< HEAD
     # Método "privado" que retorna una lista con las rutas de fromVertex a toVertex, retorna rutas repetidas
 
-    def __getRoads(self,fromVertex,toVertex,searching=None,roads=None):
-        if not searching:
-            searching = []
-            roads = []
-        searching = searching.copy()
-        searching.append(fromVertex)
-        fromVertex = self.vertices.search(fromVertex)
-        toVertex = self.vertices.search(toVertex)
-        if fromVertex.edges.search(toVertex.name):
-            road = {}
-            for i in searching:
-                road[i] = None
-            road[fromVertex.name] = None
-            road[toVertex.name] = None
-            roads.append(list(road.keys()))
-        for i in fromVertex.edges:
-            if i.name == toVertex.name:
+        # Método "privado" que retorna una lista con las rutas de fromVertex a toVertex, retorna rutas repetidas
+
+    def __getRoads(self, fromVertex, toVertex, searching=None, roads=None):
+        if self.vertices.search(fromVertex) and self.vertices.search(toVertex):
+            if not searching:
+                searching = []
+                roads = []
+            searching = searching.copy()
+            searching.append(fromVertex)
+            fromVertex = self.vertices.search(fromVertex)
+            toVertex = self.vertices.search(toVertex)
+            if fromVertex.edges.search(toVertex.name):
                 road = {}
-                for j in searching:
-                    road[j] = None
+                for i in searching:
+                    road[i] = None
                 road[fromVertex.name] = None
                 road[toVertex.name] = None
                 roads.append(list(road.keys()))
-            elif i.name not in searching:
-                self.__getRoads(i.name,toVertex.name,searching,roads)
+            for i in fromVertex.edges:
+                if i.name == toVertex.name:
+                    road = {}
+                    for j in searching:
+                        road[j] = None
+                    road[fromVertex.name] = None
+                    road[toVertex.name] = None
+                    roads.append(list(road.keys()))
+                elif i.name not in searching:
+                    self.__getRoads(i.name, toVertex.name, searching, roads)
         return roads
 
     # Método que se encarga de eliminar las repeticiones de __getRoads, este es el que debe ser
     # llamado cuando se quiren las rutas entre dos nodos, retorna una lista de tuplas, donde cada
     # tupla es una ruta entre fromVertex y toVertex
 
-    def getRoads(self,fromVertex,toVertex):
-        roads = self.__getRoads(fromVertex,toVertex).copy()
-        routes = {}
-        for i in roads:
-            routes[tuple(i)]=None
-        return list(routes.keys())
+    def getRoads(self, fromVertex, toVertex):
+        roads = self.__getRoads(fromVertex,toVertex)
+        if roads:
+            routes = {}
+            for i in roads:
+                routes[tuple(i)] = None
+            return list(routes.keys())
 
 
-"""
-=======
-    def getRoads(self,fromVertex,toVertex,searching=None,):
-        if(self.vertices.search(fromVertex) and self.vertices.search(toVertex)) :
-            if not searching:
-                searching = []
-            searching = searching.copy()
-            searching.append(fromVertex)
-            fromVertex = self.vertices.search(fromVertex)
-            toVertex = self.vertices.search(toVertex)
-            if fromVertex.edges.search(toVertex.name):
-                array = {}
-                for i in searching:
-                    array[i]=None
-                array[fromVertex.name] = None
-                array[toVertex.name] = None
-                print(array.keys())
-            for i in fromVertex.edges:
-                if i.name == toVertex.name:
-                    array = {}
-                    for j in searching:
-                        array[j] = None
-                    array[fromVertex.name] = None
-                    array[toVertex.name] = None
-                    print(array.keys())
-                elif not i.name in searching:
-                    self.getRoads(i.name,toVertex.name,searching)
 
-'''
->>>>>>> 93ba64d6153235efc92189fba531c9f0d66cb57a
 g = Graph()
 file = open("graph.txt")
 content = file.read()
 file.close()
 g.buildGraph(content)
 g.makeGraph()
-g.getRoads("A","E")
-"""
+print(g.getRoads("A","E"))
