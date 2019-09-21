@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from LinkedList import LinkedList
 class Edge:
     def __init__(self,vertexDestination,characteristic):

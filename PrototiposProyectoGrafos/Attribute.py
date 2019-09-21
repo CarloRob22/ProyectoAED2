@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class Attribute:
     def __init__(self,distance = 0 , bandWidth = 0 ,users = 0 ,traffic = 0 ,mediaType = "undefined"):
         self.distance = int(distance)

@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from LinkedList import LinkedList
 from Edge import Edge
 

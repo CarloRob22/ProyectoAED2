@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from mainwindow import *
 from login import *
 from Graph import *
