@@ -44,8 +44,9 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
         graph.buildGraph(self.editor.toPlainText())
         x = self.initialServer.text()
         y = self.finalServer.text()
-        graph.getRoads(x,y)
-        
+        if(x != "" and y != ""):
+            graph.getRoads(x,y)
+
 if __name__=="__main__":
     apt = QtWidgets.QApplication([])
     window = MainWindow()

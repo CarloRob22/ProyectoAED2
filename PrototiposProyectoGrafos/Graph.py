@@ -97,29 +97,30 @@ class Graph:
                 self.addEdge(lastVertex,destVertex,attribute) #Agrega la arista a la lista enlazada del ultimo vertice
 
     def getRoads(self,fromVertex,toVertex,searching=None,):
-        if not searching:
-            searching = []
-        searching = searching.copy()
-        searching.append(fromVertex)
-        fromVertex = self.vertices.search(fromVertex)
-        toVertex = self.vertices.search(toVertex)
-        if fromVertex.edges.search(toVertex.name):
-            array = {}
-            for i in searching:
-                array[i]=None
-            array[fromVertex.name] = None
-            array[toVertex.name] = None
-            print(array.keys())
-        for i in fromVertex.edges:
-            if i.name == toVertex.name:
+        if(self.vertices.search(fromVertex) and self.vertices.search(toVertex)) :
+            if not searching:
+                searching = []
+            searching = searching.copy()
+            searching.append(fromVertex)
+            fromVertex = self.vertices.search(fromVertex)
+            toVertex = self.vertices.search(toVertex)
+            if fromVertex.edges.search(toVertex.name):
                 array = {}
-                for j in searching:
-                    array[j] = None
+                for i in searching:
+                    array[i]=None
                 array[fromVertex.name] = None
                 array[toVertex.name] = None
                 print(array.keys())
-            elif not i.name in searching:
-                self.getRoads(i.name,toVertex.name,searching)
+            for i in fromVertex.edges:
+                if i.name == toVertex.name:
+                    array = {}
+                    for j in searching:
+                        array[j] = None
+                    array[fromVertex.name] = None
+                    array[toVertex.name] = None
+                    print(array.keys())
+                elif not i.name in searching:
+                    self.getRoads(i.name,toVertex.name,searching)
 
 '''
 g = Graph()
