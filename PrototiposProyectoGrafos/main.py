@@ -22,7 +22,7 @@ class MainWindow(QtWidgets.QMainWindow,Ui_MainWindow):
         explorer = QtWidgets.QFileDialog()
         currentDir = explorer.directory().canonicalPath()
         name, typefilter = explorer.getOpenFileName(None, "Open File", currentDir, "Text (*.txt)")
-        if(typefilter):
+        if name:
             file = open(name)
             content = file.read()
             file.close()
