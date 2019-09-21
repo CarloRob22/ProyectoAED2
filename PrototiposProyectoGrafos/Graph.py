@@ -140,6 +140,26 @@ class Graph:
                 routes[tuple(i)] = None
             return list(routes.keys())
 
+    def getWeigthOfEdge(self,fromVertex,toVertex):
+        fromVertex = self.vertices.search(fromVertex)
+        edge =  fromVertex.edges.search(toVertex)
+        return edge.weight
+
+    def getWeigthOfRoads(self,roads):
+        RoadsAndWeith = {}
+        count = 0
+        for road in roads:
+            weight = 0
+            toVertex = None
+            for Vertex in road:
+                fromVertex = toVertex
+                toVertex =  Vertex
+                if(fromVertex):
+                    weight += self.getWeigthOfEdge(fromVertex,toVertex)
+            RoadsAndWeith[count] = weight
+            count += 1
+        return RoadsAndWeith
+
 
 
 g = Graph()
@@ -148,4 +168,7 @@ content = file.read()
 file.close()
 g.buildGraph(content)
 g.makeGraph()
-print(g.getRoads("A","E"))
+road = g.getRoads("A","E")
+s = g.getWeigthOfRoads(road)
+for k,v in s.items():
+    print("ruta: %s peso: %s" % (road[k],v))
