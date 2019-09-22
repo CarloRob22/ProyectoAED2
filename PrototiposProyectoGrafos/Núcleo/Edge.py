@@ -1,4 +1,5 @@
-from LinkedList import LinkedList
+# -*- coding: utf-8 -*-
+from Núcleo.LinkedList import LinkedList
 class Edge:
     def __init__(self,vertexDestination,characteristic):
         self.name= vertexDestination

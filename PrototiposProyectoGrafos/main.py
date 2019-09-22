@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
-from mainWindowGUI import *
-from Graph import *
-from embeddedimageGUI import *
-from RouteTable import *
+from Núcleo.mainWindowGUI import *
+from Núcleo.Graph import *
+from Núcleo.embeddedimageGUI import *
+from Núcleo.RouteTable import *
 from PyQt5 import uic
 
 

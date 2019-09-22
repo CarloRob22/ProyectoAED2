@@ -1,4 +1,5 @@
-from Node import Node
+# -*- coding: utf-8 -*-
+from Núcleo.Node import Node
 
 class LinkedList:
 
@@ -52,11 +53,11 @@ class LinkedList:
             return ", ".join(valueArray)
 
     def __iter__(self):
-        if(not self.first):
-            return None
-        else:
-            current = self.first 
-            while(current):
-                yield current.value
-                current = current.next
+        #if(not self.first):
+         #   return None
+        #else:
+        current = self.first 
+        while(current):
+            yield current.value
+            current = current.next
             

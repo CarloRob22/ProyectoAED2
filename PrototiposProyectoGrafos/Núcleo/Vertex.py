@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from LinkedList import LinkedList
-from Edge import Edge
+from Núcleo.LinkedList import LinkedList
+from Núcleo.Edge import Edge
 
 class Vertex:
     def __init__(self,name):

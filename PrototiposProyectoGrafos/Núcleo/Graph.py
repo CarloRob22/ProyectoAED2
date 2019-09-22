@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
-from LinkedList import LinkedList
-from Vertex import Vertex
-from Attribute import Attribute
+from Núcleo.LinkedList import LinkedList
+from Núcleo.Vertex import Vertex
+from Núcleo.Attribute import Attribute
 import networkx as nx
 import matplotlib.pyplot as plt
 
